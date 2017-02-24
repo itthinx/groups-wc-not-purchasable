@@ -13,6 +13,17 @@ private static $category_to_group = array(
 
 This means that any product that belongs to the "Standard" product category cannot be purchased by members of the "Premium" group.
 
+You could change this and add as many entries as needed, for example:
+
+```
+private static $category_to_group = array(
+	'Standard' => 'Premium',
+	'Wholesale' => 'Distributor'
+);
+```
+
+... would also exclude members of the "Distributor" group from purchasing products in the "Wholesale" product category.
+
 ## Usage
 
 - Install and activate this plugin.
