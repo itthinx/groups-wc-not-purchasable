@@ -7,8 +7,8 @@ In the plugin's main file, an array $category_to_group determines which product 
 
 ```
 private static $category_to_group = array(
-		'Standard' => 'Premium',
-	);
+	'Standard' => 'Premium',
+);
 ```
 
 This means that any product that belongs to the "Standard" product category cannot be purchased by members of the "Premium" group.
