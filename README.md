@@ -69,9 +69,11 @@ The groups are:
 - Platinum
 - Diamond
 
-We don't want to let members of the Premium, Platinum or Diamond group purchase products from the "Basic Membership" product category. Likewise, members of the Platinum or Diamond group shouldn't
-purchase products from the "Premium Membership" or "Platinum Membership" product categories.
-Our Diamond members shouldn't be able to purchase products from the basic, premium or platinum product categories.
+We don't want to let members of the Basic, Premium, Platinum or Diamond group purchase products from product categories that belong to products that grant access to the same or inferior membership.
+
+Members of the Platinum or Diamond group shouldn't purchase products from the inferior "Premium Membership" or "Platinum Membership" product categories.
+
+Our Diamond members shouldn't be able to purchase products from the basic, premium, platinum or diamond product categories.
 
 This is how we set up our filter based on these requirements. You can place this in your theme's `functions.php` file.
 
@@ -79,9 +81,16 @@ This is how we set up our filter based on these requirements. You can place this
 add_filter( 'groups_wc_not_purchasable_category_to_group', 'my_advanced_category_to_group_filter' );
 function my_advanced_category_to_group_filter( $category_to_group ) {
 	return array(
+		'Basic Membership'    => 'Basic',
 		'Basic Membership'    => 'Premium',
+		'Basic Membership'    => 'Platinum',
+		'Basic Membership'    => 'Diamond',
+		'Premium Membership'  => 'Premium',
 		'Premium Membership'  => 'Platinum',
-		'Platinum Membership' => 'Diamond'
+		'Premium Membership'  => 'Diamond',
+		'Platinum Membership' => 'Platinum'
+		'Platinum Membership' => 'Diamond',
+		'Diamond Membership'  => 'Diamond'
 	);
 }
 ```
