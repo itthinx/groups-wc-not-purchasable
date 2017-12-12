@@ -64,10 +64,12 @@ The product categories are:
 
 - Basic Membership
 - Premium Membership
+- Platinum Membership
 - Diamond Membership
 
 The groups are:
 
+- Basic
 - Premium
 - Platinum
 - Diamond
