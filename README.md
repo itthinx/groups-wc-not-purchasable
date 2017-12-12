@@ -4,8 +4,11 @@ This plugin is an extension to Groups and WooCommerce to have products that can 
 This plugin can be used to have products that can not be purchased by group members.
 
 ## Requirements
-- [Groups](http://wordpress.org/plugins/groups/)
-- [WooCommerce](http://wordpress.org/plugins/woocommerce/)
+- Required : [Groups](http://wordpress.org/plugins/groups/)
+- Required : [WooCommerce](http://wordpress.org/plugins/woocommerce/)
+- Recommended : [Groups WooCommerce](https://woocommerce.com/products/groups-woocommerce/)
+
+To make appropriate use of this plugin following the examples given below, you should be using [Groups WooCommerce](https://woocommerce.com/products/groups-woocommerce/).
 
 ## Usage
 
