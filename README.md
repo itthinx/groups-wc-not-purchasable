@@ -42,6 +42,17 @@ function my_simple_category_to_group_filter( $category_to_group ) {
 }
 ```
 
+The plugin will also filter the visibility of the products that are not purchasable.
+If you want to change this, you can use the `groups_wc_not_purchasable_filter_visibility` filter to modify this behavior.
+
+```
+add_filter( 'groups_wc_not_purchasable_filter_visibility', 'my_groups_wc_not_purchasable_filter_visibility', 10, 3 );
+function my_groups_wc_not_purchasable_filter_visibility( $filter_visibility, $visible, $product_id ) {
+	return false;
+}
+```
+
+
 ### Added more entries based on the Simple Example
 
 You could change the above and add as many entries as needed. For example, to also exclude members of the "Distributor" group from purchasing products in the "Wholesale" product category:

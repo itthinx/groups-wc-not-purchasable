@@ -39,17 +39,17 @@ class Groups_WC_Not_Purchasable {
 
 	/**
 	 * Maps product categories to groups:
-	 * 
+	 *
 	 * For example, products in the "Standard" product category
-	 * are not available to members of the "Premium" group ...
+	 * are not available to members of the "Premium" group - use the
+	 * groups_wc_not_purchasable_category_to_group filter to return
+	 * and array holding:
+	 *
+	 * <code>array( 'Standard' => 'Premium' )</code>
 	 * 
-	 * private static $category_to_group = array(
-	 *     'Standard' => 'Premium'
-	 * );
+	 * Alternatively, you could fork this plugin and directly define it here.
 	 */
-	private static $category_to_group = array(
-		'Standard' => 'Premium',
-	);
+	private static $category_to_group = array();
 
 	/**
 	 * Registers the restrictions filter.
@@ -66,22 +66,30 @@ class Groups_WC_Not_Purchasable {
 	 * Otherwise it will return the unmodified value of $purchasable.
 	 * 
 	 * @param boolean $purchasable
-	 * @param WC_Product $product
+	 * @param WC_Product|int $product
 	 * 
 	 * @return boolean
 	 */
 	public static function woocommerce_is_purchasable( $purchasable, $product ) {
 		$result = $purchasable;
+		if ( is_object( $product ) ) {
+			$product_id = method_exists( $product, 'get_id' ) ? $product->get_id() : $product->id;
+		} else {
+			$product_id = intval( $product );
+		}
 		if ( class_exists( 'Groups_User' ) && class_exists( 'Groups_Group' ) ) {
 			if ( is_user_logged_in() ) {
 				$user_id = get_current_user_id();
 				$user = new Groups_User( $user_id );
-				$category_to_group = apply_filters( 'groups_wc_not_purchasable_category_to_group', self::$category_to_group );
+				$category_to_group = apply_filters(
+					'groups_wc_not_purchasable_category_to_group',
+					self::$category_to_group
+				);
 				if ( is_array( $category_to_group ) ) {
 					foreach( $category_to_group as $category => $group ) {
 						if ( $group = Groups_Group::read_by_name( $group ) ) {
 							if ( $user->is_member( $group->group_id ) ) {
-								if ( has_term( $category, 'product_cat', $product->id ) ) {
+								if ( has_term( $category, 'product_cat', $product_id ) ) {
 									$result = false;
 									break;
 								}
@@ -94,5 +102,19 @@ class Groups_WC_Not_Purchasable {
 		return $result;
 	}
 
+	/**
+	 * Filters the product visibility.
+	 *
+	 * @param boolean $visible
+	 * @param int $product_id
+	 *
+	 * @return boolean true if product is visible
+	 */
+	public static function woocommerce_product_is_visible( $visible, $product_id ) {
+		if ( apply_filters( 'groups_wc_not_purchasable_filter_visibility', true, $visible, $product_id ) ) {
+			$visible = self::woocommerce_is_purchasable( $visible, $product_id );
+		}
+		return $visible;
+	}
 }
 Groups_WC_Not_Purchasable::init();
