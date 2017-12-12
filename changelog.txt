@@ -1,0 +1,11 @@
+Groups WC Not Purchasable               Changelog              www.itthinx.com
+
+= 1.1.0 =
+* Added readme.txt.
+* Added ABSPATH check.
+* Added changelog.txt.
+* Fixed formatting in plugin header.
+* Added the groups_wc_not_purchasable_category_to_group filter.
+
+= 1.0.0 =
+* Initial release.

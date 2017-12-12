@@ -1,32 +1,36 @@
 <?php
 /**
  * groups-wc-not-purchasable.php
-*
-* Copyright (c) www.itthinx.com
-*
-* This code is released under the GNU General Public License.
-* See COPYRIGHT.txt and LICENSE.txt.
-*
-* This code is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This header and all notices must be kept intact.
-*
-* @author itthinx
-* @package groups
-* @since groups 1.0.0
-*
-* Plugin Name: Groups WooCommerce Not Purchasable - Example Plugin
-* Plugin URI: http://www.itthinx.com/plugins/groups
-* Description: An example of using the Groups plugin with WooCommerce to have products that can not be purchased by group members.
-* Version: 1.0.0
-* Author: itthinx
-* Author URI: http://www.itthinx.com
-* Donate-Link: http://www.itthinx.com
-* License: GPLv3
-*/
+ *
+ * Copyright (c) www.itthinx.com
+ *
+ * This code is released under the GNU General Public License.
+ * See COPYRIGHT.txt and LICENSE.txt.
+ *
+ * This code is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * This header and all notices must be kept intact.
+ *
+ * @author itthinx
+ * @package groups
+ * @since groups 1.0.0
+ *
+ * Plugin Name: Groups WooCommerce Not Purchasable - Example Plugin
+ * Plugin URI: http://www.itthinx.com/plugins/groups
+ * Description: An example of using the Groups plugin with WooCommerce to have products that can not be purchased by group members.
+ * Version: 1.1.0
+ * Author: itthinx
+ * Author URI: http://www.itthinx.com
+ * Donate-Link: http://www.itthinx.com
+ * License: GPLv3
+ */
+
+if ( !defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Restrict products that belong to a certain category to be unavailable for group members.
@@ -72,12 +76,15 @@ class Groups_WC_Not_Purchasable {
 			if ( is_user_logged_in() ) {
 				$user_id = get_current_user_id();
 				$user = new Groups_User( $user_id );
-				foreach( self::$category_to_group as $category => $group ) {
-					if ( $group = Groups_Group::read_by_name( $group ) ) {
-						if ( $user->is_member( $group->group_id ) ) {
-							if ( has_term( $category, 'product_cat', $product->id ) ) {
-								$result = false;
-								break;
+				$category_to_group = apply_filters( 'groups_wc_not_purchasable_category_to_group', self::$category_to_group );
+				if ( is_array( $category_to_group ) ) {
+					foreach( $category_to_group as $category => $group ) {
+						if ( $group = Groups_Group::read_by_name( $group ) ) {
+							if ( $user->is_member( $group->group_id ) ) {
+								if ( has_term( $category, 'product_cat', $product->id ) ) {
+									$result = false;
+									break;
+								}
 							}
 						}
 					}

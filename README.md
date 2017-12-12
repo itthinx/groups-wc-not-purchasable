@@ -3,6 +3,41 @@ An example of using the Groups plugin with WooCommerce to have products that can
 
 This plugin can be used to have products that can not be purchased by group members.
 
+## Using a filter hook to set up which product categories cannot be seen by which groups.
+Use the filter `groups_wc_not_purchasable_category_to_group` to change this.
+Let's have a look at an example. In this example, we have three product categories that will be hidden from members of certain groups.
+
+The product categories are:
+
+- Basic Membership
+- Premium Membership
+- Diamond Membership
+
+The groups are:
+
+- Premium
+- Platinum
+- Diamond
+
+We don't want to let members of the Premium, Platinum or Diamond group purchase products from the "Basic Membership" product category.
+Likewise, members of the Platinum or Diamond group shouldn't
+purchase products from the "Premium Membership" or "Platinum Membership" product categories.
+Our Diamond members shouldn't be able to purchase products from the basic, premium or platinum product categories.
+This is how we set up our filter based on these requirements. You can place this in your theme's `functions.php` file.
+
+```
+add_filter( 'groups_wc_not_purchasable_category_to_group', 'my_category_to_group_filter' );
+function my_category_to_group_filter( $category_to_group ) {
+	return array(
+		'Basic Membership'    => 'Premium',
+		'Premium Membership'  => 'Platinum',
+		'Platinum Membership' => 'Diamond'
+	);
+}
+```
+
+## Alternative to using the filter (not recommended).
+
 In the plugin's main file, an array $category_to_group determines which product categories are unavailable for which groups. By default, it is declared like this:
 
 ```
