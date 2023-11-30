@@ -2,10 +2,10 @@
 Contributors: itthinx
 Donate link: http://www.itthinx.com/shop/
 Tags: group, groups, woocommerce, visibility, product
-Requires at least: 4.0.0
-Tested up to: 4.9
-Requires PHP: 5.5.0
-Stable tag: 1.1.0
+Requires at least: 6.0
+Tested up to: 6.4
+Requires PHP: 7.3
+Stable tag: 1.2.0
 License: GPLv3
 
 This plugin is an extension to Groups and WooCommerce to have products that can not be purchased by group members.
