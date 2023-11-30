@@ -1,5 +1,13 @@
 Groups WC Not Purchasable               Changelog              www.itthinx.com
 
+= 1.2.0 =
+* WordPress 6.4 compatible.
+* Requires at least WordPress 6.0.
+* WooCommerce 8.3. compatible.
+* WooCommerce HPOS compatible.
+* Requires at least WooCommerce 7.9.
+* Fixes missing visibility filter.
+
 = 1.1.0 =
 * Added readme.txt.
 * Added ABSPATH check.

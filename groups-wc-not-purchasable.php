@@ -15,16 +15,18 @@
  * This header and all notices must be kept intact.
  *
  * @author itthinx
- * @package groups
- * @since groups 1.0.0
  *
- * Plugin Name: Groups WooCommerce Not Purchasable - Example Plugin
+ * @since 1.0.0
+ *
+ * Plugin Name: Groups WooCommerce Not Purchasable
  * Plugin URI: http://www.itthinx.com/plugins/groups
- * Description: An example of using the Groups plugin with WooCommerce to have products that can not be purchased by group members.
- * Version: 1.1.0
+ * Description: Use the Groups plugin with WooCommerce to have products that can not be purchased or viewed by group members.
+ * Version: 1.2.0
  * Author: itthinx
- * Author URI: http://www.itthinx.com
- * Donate-Link: http://www.itthinx.com
+ * WC requires at least: 7.9
+ * WC tested up to: 8.3
+ * Author URI: https://www.itthinx.com
+ * Donate-Link: https://www.itthinx.com
  * License: GPLv3
  */
 
@@ -56,6 +58,19 @@ class Groups_WC_Not_Purchasable {
 	 */
 	public static function init() {
 		add_filter( 'woocommerce_is_purchasable', array( __CLASS__, 'woocommerce_is_purchasable' ), 10, 2 );
+		add_filter( 'woocommerce_is_visible', array( __CLASS__, 'woocommerce_product_is_visible' ), 10, 2 );
+		add_action( 'before_woocommerce_init', array( __CLASS__, 'before_woocommerce_init' ) );
+	}
+
+	/**
+	 * Declare HPOS compatibility
+	 *
+	 * @since 1.2.0
+	 */
+	public static function before_woocommerce_init() {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
 	}
 
 	/**
