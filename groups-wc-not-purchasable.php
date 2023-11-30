@@ -15,13 +15,13 @@
  * This header and all notices must be kept intact.
  *
  * @author itthinx
- * @package groups
- * @since groups 1.0.0
+ *
+ * @since 1.0.0
  *
  * Plugin Name: Groups WooCommerce Not Purchasable - Example Plugin
  * Plugin URI: http://www.itthinx.com/plugins/groups
  * Description: An example of using the Groups plugin with WooCommerce to have products that can not be purchased by group members.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: itthinx
  * Author URI: http://www.itthinx.com
  * Donate-Link: http://www.itthinx.com
