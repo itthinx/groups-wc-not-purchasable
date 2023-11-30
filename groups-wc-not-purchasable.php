@@ -18,9 +18,9 @@
  *
  * @since 1.0.0
  *
- * Plugin Name: Groups WooCommerce Not Purchasable - Example Plugin
+ * Plugin Name: Groups WooCommerce Not Purchasable
  * Plugin URI: http://www.itthinx.com/plugins/groups
- * Description: An example of using the Groups plugin with WooCommerce to have products that can not be purchased by group members.
+ * Description: Use the Groups plugin with WooCommerce to have products that can not be purchased or viewed by group members.
  * Version: 1.2.0
  * Author: itthinx
  * WC requires at least: 7.9
