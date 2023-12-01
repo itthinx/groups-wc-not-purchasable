@@ -58,7 +58,7 @@ class Groups_WC_Not_Purchasable {
 	 */
 	public static function init() {
 		add_filter( 'woocommerce_is_purchasable', array( __CLASS__, 'woocommerce_is_purchasable' ), 10, 2 );
-		add_filter( 'woocommerce_is_visible', array( __CLASS__, 'woocommerce_product_is_visible' ), 10, 2 );
+		add_filter( 'woocommerce_product_is_visible', array( __CLASS__, 'woocommerce_product_is_visible' ), 10, 2 );
 		add_action( 'before_woocommerce_init', array( __CLASS__, 'before_woocommerce_init' ) );
 	}
 
